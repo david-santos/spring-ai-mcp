@@ -104,3 +104,4 @@ In the browser UI, set the Transport Type to Streamable HTTP and the URL to http
 ## References
 - [Spring AI Docs](https://docs.spring.io/spring-ai/reference/2.0/index.html):
     - [Model Context Protocol (MCP)](https://docs.spring.io/spring-ai/reference/2.0/api/mcp/mcp-overview.html)
+- [Spring AI MCP Examples](https://github.com/spring-projects/spring-ai-examples/tree/main/model-context-protocol/weather)
