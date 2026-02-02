@@ -13,4 +13,11 @@
 	<artifactId>spring-ai-mcp-weather-server</artifactId>
 	<name>spring-ai-mcp-weather-server</name>
 	<description>This module demonstrates the use Spring AI to build MCP servers</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.ai</groupId>
+			<artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+		</dependency>
+	</dependencies>
 </project>
