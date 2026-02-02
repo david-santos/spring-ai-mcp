@@ -43,15 +43,14 @@ public class WeatherService {
 	}
 
 	@McpTool(description = "Get the weather forecast for a specific location")
-	public String getWeatherForecast(McpSyncServerExchange exchange,
+	public String getWeatherForecast(McpSyncServerExchange exchange, // The exchange parameter provides access to server-client communication capabilities. It allows the server to send notifications and make requests back to the client.
 			@McpToolParam(description = "The location latitude") String latitude,
 			@McpToolParam(description = "The location longitude") String longitude,
-			@McpProgressToken Object progressToken) {
+			@McpProgressToken Object progressToken) { // The progressToken parameter enables progress tracking. The client provides this token, and the server uses it to send progress updates.
 
-		exchange.loggingNotification(LoggingMessageNotification.builder()
+		exchange.loggingNotification(LoggingMessageNotification.builder() // Sends structured log messages to the client for debugging and monitoring purposes.
 			.level(LoggingLevel.DEBUG)
 			.data("Call getWeatherForecast Tool with latitude: " + latitude + " and longitude: " + longitude)
-//			.meta(Map.of()) // non-null meta as a workaround for bug: ...
 			.build());
 
 		// 0% progress
@@ -72,7 +71,7 @@ public class WeatherService {
 
 			// 50% progress
 			if (progressToken != null) {
-				exchange.progressNotification(new ProgressNotification(progressToken, 0.5, 1.0, "Start sampling"));
+				exchange.progressNotification(new ProgressNotification(progressToken, 0.5, 1.0, "Start sampling")); // reports operation progress (50% in this case) to the client with a descriptive message.
 			}
 
 			String samplingMessage = """
@@ -98,7 +97,7 @@ public class WeatherService {
 				.messages(List.of(new SamplingMessage(Role.USER, new TextContent(samplingMessage))))
 				.maxTokens(256)
 				.modelPreferences(ModelPreferences.builder().addHint("ollama").build())
-				.build());
+				.build()); // The most powerful feature - the server can request the client's LLM to generate content.
 
 			epicPoem = ((TextContent) samplingResponse.content()).text();
 
